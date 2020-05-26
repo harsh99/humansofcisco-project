@@ -1,0 +1,42 @@
+{% extends 'stories\base.html' %}
+
+{% block content %}
+{% csrf_token %}
+
+<head>
+<style>
+.aboutdiv{
+    position:absolute;
+    top: 35%;
+    left: 50%;
+    width:40em;
+    height:18em;
+    margin-top: -9em;
+    margin-left: -15em;
+  }
+</style>
+</head>
+
+<div class="aboutdiv">
+  <h4 align="center">What is this <b>'Humans Of Cisco?'</b></h4>
+  <h5 align="center">
+    Hey onlooker, how are you? Looks like you've lost your way and stumbled here. But now that you are here,
+    let me ask you a question? How has your experience been in Cisco? What's the greatest high you've ever felt here?
+    What was that one moment which you wish hadn't happened? Is there a story from a case you worked on, a code you delivered,
+    a deadline you met, or a Work From Home anecdote that's worth talking about? <br>
+    I think yes, you have. All of us do but we're too hardwired to mechanically push
+    the humane side of ourselves on the backseat and march forward. But not here. Here you get a sanctum to share. A pool to let your experiences swim.
+    And a tank to fish for other's experiences as well and you know what the best part is? You don't even need to know the man whose story you read or who read yours.
+    <br>
+    This platform is not intended to make you productive, but will definitely flirt with the humane side of you.
+    So if this long excerpt has piqued even the slightest of your interest, then go ahead, <a href="{% url 'readall'%}">explore this world</a> a bit
+    and serendipitously <a href="{% url 'createstory'%}">participate a bit.</a>
+
+    For any queries, complains about this site, please reach out to Harsh (havardh2). Feedbacks are highly welcomed and direly needed.
+    Happy Exploring!!
+  </h5>
+</div>
+
+
+
+{% endblock %}

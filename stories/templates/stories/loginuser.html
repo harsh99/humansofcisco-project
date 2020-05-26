@@ -1,0 +1,33 @@
+{% extends 'stories\base.html' %}
+{% block content %}
+
+{% if error %}
+<h6 class="alert alert-danger" align="center">{{ error }}</h6>
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+  <div id="mydiv">
+    <div class="form-group">
+      <label for="id_username">Username</label>
+      <input class="form-control" id="id_username" name="username" autocomplete="username" maxlength="150" required="">
+    </div>
+    <div class="form-group">
+      <label for="id_password">Password</label>
+      <input type="password" class="form-control" id="id_password" name="password" autocomplete="current-password" required="">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+<!---
+<form method="POST">
+  {% csrf_token %}
+  <table align="center">
+      {{form.as_table }}
+    <tr>
+      <td></td>
+      <td><button type="submit">Log me in!</button></td>
+    </tr>
+  </table>
+</form>
+--->
+{% endblock %}

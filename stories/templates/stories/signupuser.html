@@ -1,0 +1,44 @@
+{% extends 'stories\base.html' %}
+{% block content %}
+
+{% if error %}
+<h6 class="alert alert-danger" align="center">{{ error }}</h6>
+{% endif %}
+{{ usercount }}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+    <h6 class="alert alert-success" align="center">{{ message }} <a href="{% url 'loginuser'%}">Login now.</a></h6>
+    {% endfor %}
+</ul>
+{% endif %}
+<div id="Signupdiv">
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="id_first_name">First Name:</label>
+      <input class="form-control" id="id_first_name" name="first_name" maxlength="30" required="" minlength="4" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_last_name">Last Name:</label>
+      <input class="form-control" id="id_last_name" name="last_name" maxlength="30" required="" minlength="4" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_username">Enter Username:</label>
+      <input class="form-control" id="id_username" name="username" maxlength="50" placeholder="Use this to login later" type="text" required="" minlength="4">
+      <span class="helptext">50 characters max.</span>
+    </div>
+    <div class="form-group">
+      <label for="id_password1">Enter password:</label>
+      <input class="form-control" id="id_password1" type="password" name="password1" required="">
+    </div>
+    <div class="form-group">
+      <label for="id_password2">Confirm password:</label>
+      <input class="form-control" id="id_password2" type="password" name="password2" required="">
+    </div>
+    <button type="submit" class="btn btn-success">Sign Up</button>
+
+</form>
+</div>
+{% endblock %}

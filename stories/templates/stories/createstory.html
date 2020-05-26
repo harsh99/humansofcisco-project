@@ -1,0 +1,31 @@
+{% extends 'stories\base.html' %}
+
+{% block content %}
+{% csrf_token %}
+
+{{ newStory }}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<br><br>
+<div class="card text-center" style="width:500px; margin:0 auto; height:100px;">
+ <div class="card">
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table align="center">
+      {{form.as_table }}
+    <tr>
+      <td></td>
+      <td><button type="submit" class="btn btn-primary">Publish Story!</button></td>
+    </tr>
+  </table>
+</form>
+</div>
+</div>
+
+{% endblock %}

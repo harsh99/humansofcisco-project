@@ -1,0 +1,55 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<!doctype html>
+<html lang="en">
+  <head>
+     <link rel="stylesheet" href="{% static 'stories/style.css'%}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="{% static 'stories/images.jpeg'%}">
+    <title>Humans Of Cisco</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+{% if user.is_authenticated %}
+<div class="sidenav">
+  <div class="sidebar-header">
+    <label id="firstnameId">Hi {{ user.first_name }} :)</label>
+  </div>
+  <a href="{% url 'readall'%}" class="{% if 'readall' in request.path or 'readonlystories' in request.path %}active{% endif %}">Cisco Stories</a>
+  <a href="{% url 'currentuser'%}" class="{% if 'currentuser' in request.path or 'editstory' in request.path or '/story/' in request.path and 'readonlystories' not in request.path %}active{% endif %}">My Storybook</a>
+  <a href="{% url 'createstory'%}" class="{% if 'create' in request.path %}active{% endif %}">Create Story</a>
+  <a href="{% url 'aboutsite'%}" class="{% if 'about' in request.path %}active{% endif %}">About</a>
+   <div class="sidebar-footer">
+  <form class="form-inline my-2 my-lg-0" action="{% url 'logoutuser' %}" method="post">
+    {% csrf_token %}
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
+  </form>
+  </div>
+</div>
+{% else %}
+<div class="sidenav">
+  <a href="{% url 'home'%}">Explore</a>
+  <a href="{% url 'signupuser'%}" class="{% if 'signup' in request.path %}active{% endif %}">Signup</a>
+  <a href="{% url 'loginuser'%}" class="{% if 'login' in request.path %}active{% endif %}">Login</a>
+  <a href="{% url 'aboutsite'%}" class="{% if 'about' in request.path %}active{% endif %}">About</a>
+</div>
+
+{% endif %}
+
+{% block content %} {% endblock %}
+</body>
+</html>

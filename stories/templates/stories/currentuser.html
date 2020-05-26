@@ -1,0 +1,46 @@
+{% extends 'stories\base.html' %}
+
+{% block content %}
+{% csrf_token %}
+
+
+{% if myStoryCount is 0 %}
+<div id="mydiv">
+  <h4 align="center">Looks like you are yet to share your story with the Cisco World. Dive in, and tell us that one incident you
+  cannot shrug off and how you felt about it from your time in Cisco. Let others explore the other side of you.
+  <a href="{% url 'createstory' %}">Share a story!</a>
+  </h4>
+</div>
+{% else %}
+  <h6 align="center" style="padding-top:10px; ">
+    Stories published: <b>{{myStoryCount}}</b>
+    Total Views: <b>{{totalViewCountForThisUser}}</b>
+  </h6>
+{% endif %}
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+{% for story in stories %}
+
+  <div class="card text-center" style="width:500px; margin:0 auto;">
+    <div class="card">
+      <a href="{% url 'viewstory' story.id %}">
+      <img class="card-img-top" src="{{story.image.url}}" alt="Card image cap" style="width:250px;">
+      <div class="card-body">
+      <h5 class="card-title" style="color:green;">{{story.title}}</h5>
+      <p class="card-text">{{story.fullstory|striptags|truncatechars:100}}</p>
+      </a>
+      <label>Storyteller: {{ story.user.get_full_name}}</label>
+      <br>
+      <label style="font-size:13px;">Created on: {{ story.created|date:'F jS Y' }}</label>
+      <br>
+      <label style="font-size:13px;"><i class="fa fa-eye" title="Total Views"></i> {{ story.viewcount }}</label>
+      </div>
+    </div>
+  </div>
+<br>
+{% endfor %}
+
+{% endblock %}

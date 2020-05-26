@@ -1,0 +1,27 @@
+{% extends 'stories\base.html' %}
+
+{% block content %}
+
+<h2>{{ error }}</h2>
+<!---Stylesheet for view icon --->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="card text-center" style="width:500px; margin:0 auto; height:100px;">
+  <div class="card">
+    <img class="card-img-top" src="{{story.image.url}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{story.title}}</h5>
+      <p class="card-text">{{story.fullstory}}</p>
+      <a href="#" class="btn btn-primary">Storyteller: {{ story.user.get_full_name}}</a>
+      <br>
+      <label style="font-size:13px;">Created on: {{ story.created|date:'F jS Y' }}</label>
+      <br>
+      <label style="font-size:13px;"><i class="fa fa-eye" title="Total Views"></i> {{ story.viewcount }}</label>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
